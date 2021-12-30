@@ -1,0 +1,13 @@
+{
+  "name": "progress-of",
+  "version": "0.0.0",
+  "description": "Get progress & ETA of iterables",
+  "main": "index.js",
+  "type": "module",
+  "repository": "laggingreflex/progress-of",
+  "keywords": ["iterable", "progress", "eta"],
+  "dependencies": {
+    "pretty-ms": "^7.0.1",
+    "simple-eta": "^3.0.2"
+  }
+}
