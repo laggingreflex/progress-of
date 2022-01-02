@@ -15,11 +15,13 @@ const lazyKeys = ['etaValue', 'eta', 'rate', 'elapsedValue', 'elapsed', 'percent
  * }
  * ```
  */
-export default function* progressOf(iterable) {
-  const total = iterable.length ?? iterable.size;
+export default function* progressOf(iterable, opts) {
+  const total = iterable.length ?? iterable.size ?? opts?.size ?? Infinity;
   const start = new Date;
   const eta = makeEta({ max: total });
-  for (let current = 0; current < total; current++) {
+  let current = -1;
+  for (const element of iterable) {
+    current++;
     eta.report(current);
     const now = new Date;
     const progress = { current, total, start, now };
@@ -36,7 +38,11 @@ export default function* progressOf(iterable) {
       p.ratio = current / total;
       p.percentValue = p.ratio * 100;
       p.percent = Math.floor(p.percentValue) + '%';
-      p.message = `${p.percent} [${current}/${total}] ETA: ${p.eta} Elapsed: ${p.elapsed}`;
+      if (isFinite(total)) {
+        p.message = `${p.percent} [${current}/${total}] ETA: ${p.eta} Elapsed: ${p.elapsed}`;
+      } else {
+        p.message = `[${current}] Elapsed: ${p.elapsed}`;
+      }
       const descriptor = {};
       for (const key in lazyKeys) {
         descriptor[key] = { value: p[key] };
@@ -44,7 +50,6 @@ export default function* progressOf(iterable) {
       Object.defineProperties(progress, descriptor);
       return p[key];
     });
-    const element = iterable[current];
     yield [element, progress];
   }
 }

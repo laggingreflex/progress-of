@@ -25,10 +25,11 @@ for await(const [item, p] of progressOf([1, 2, 3])) {
 ## API
 
 ```js
-for(const [, progress] of progressOf(iterable)) {}
+for(const [, progress] of progressOf(iterable, opts)) {}
 ```
 
 * **`iterable`** `[Iterable]` Iterable to iterate over
+* **`opts.size`** `[number=iterable.length|Infinity]` Iterable's size
 * **`progress.eta`** `[string]` Human readable current ETA (between 0 & ∞)
 * **`progress.elapsed`** `[string]` Human readable time elapsed since start
 * **`progress.percent`** `[string]` Human readable current percentage done
