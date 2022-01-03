@@ -40,9 +40,9 @@ export default function* progressOf(iterable, opts) {
       p.percentValue = p.ratio * 100;
       p.percent = Math.floor(p.percentValue) + '%';
       if (isFinite(total)) {
-        p.message = `${p.percent} [${current}/${total}] ETA: ${p.eta} Elapsed: ${p.elapsed}`;
+        p.message = `${p.percent} [${current+1}/${total}] ETA: ${p.eta} Elapsed: ${p.elapsed}`;
       } else {
-        p.message = `[${current}] Elapsed: ${p.elapsed}`;
+        p.message = `[${current+1}] Elapsed: ${p.elapsed}`;
       }
       const descriptor = {};
       for (const key in lazyKeys) {
