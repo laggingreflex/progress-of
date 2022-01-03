@@ -1,6 +1,6 @@
 {
   "name": "progress-of",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Get progress & ETA of iterables",
   "main": "index.js",
   "type": "module",
