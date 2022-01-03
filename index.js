@@ -16,6 +16,7 @@ const lazyKeys = ['etaValue', 'eta', 'rate', 'elapsedValue', 'elapsed', 'percent
  * ```
  */
 export default function* progressOf(iterable, opts) {
+  if (typeof opts === 'number') opts = { size: opts };
   const total = iterable.length ?? iterable.size ?? opts?.size ?? Infinity;
   const start = new Date;
   const eta = makeEta({ max: total });
